@@ -1,18 +1,28 @@
 <?php
 
 require_once "Buku.php";
+require_once "Database/Database.php";
 
 class DaftarBukuModel
 {
 
     public function getData()
     {
-        $daftar_buku = array(
-            new Buku('Belajar Pemograman Web', 'Robert T.', 'Informatika', '2024'),
-            new Buku('Matematika Diskrit', 'Rinaldi M.', 'Andi Publisher', '2017'),
-            new Buku('Kalkulus', 'Emely S.', 'Airlangga', '2024'),
-            new Buku('Metedologi Penelitian', 'James W.', 'UIN Publisher', '2018'),
-        );
+        $db = new Database();
+        $koneksi = $db->getKoneksi();
+
+        $sql = "SELECT * FROM buku";
+
+        $query = $koneksi->query($sql);
+
+        $daftar_buku = [];
+
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $buku = new Buku($row['judul'], $row['pengarang'], $row['penerbit'], $row['tahun']);
+                array_push($daftar_buku, $buku);
+            }
+        }
 
         return $daftar_buku;
     }
