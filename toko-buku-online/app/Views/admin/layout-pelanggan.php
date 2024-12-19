@@ -70,7 +70,6 @@
 </head>
 
 <body>
-
     <nav class="navbar bg-body-tertiary bg-light mb-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
@@ -83,7 +82,7 @@
             </a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Cari Data Pelanggan" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Cari</button>
+                <button class="btn btn-outline-primary" type="submit">Cari</button>
             </form>
         </div>
     </nav>
@@ -97,7 +96,7 @@
             <h5 class="mb-3">Menu</h5>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="dashbord">Dashboard</a>
+                    <a class="nav-link active" href="dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="databuku">Data Buku</a>
@@ -116,7 +115,7 @@
         </div>
     </div>
 
-    <footer class="p-5 bg-info mt-auto text-center">
+    <footer class="p-5 bg-dark mt-auto text-light text-center">
         &copy; 2024. Kelas A Pemrograman Web2. All Rights Reserved
     </footer>
 

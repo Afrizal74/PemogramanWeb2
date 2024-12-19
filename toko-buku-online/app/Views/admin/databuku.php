@@ -1,11 +1,27 @@
-<?= $this->extend('admin/layout'); ?>
+<?= $this->extend('admin/layout-pelanggan'); ?>
 
-<?= $this->section('content'); ?>
+<?= $this->section('mainadmin'); ?>
 
-<div class="col-9">
+<div class="col-12">
     <br>
     <h1>Data Buku</h1>
     <!-- Topbar -->
+
+    <?php if (session('sukses')): ?>
+        <div class="mb-3">
+            <div class="alert alert-success">
+                <strong>Sukses</strong> <?= session('sukses') ?>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php if (session('gagal')): ?>
+        <div class="mb-3">
+            <div class="alert alert-success">
+                <strong>Gagal</strong> <?= session('gagal') ?>
+            </div>
+        </div>
+    <?php endif ?>
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -13,16 +29,9 @@
     </button>
 
     <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </div>
+    <form class="col-3 d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
     </form>
 
     <hr>
@@ -46,48 +55,26 @@
         <tbody>
 
             <!-- Data Dummy -->
-            <tr>
-                <td>1</td>
-                <td>Lord Makan Orang</td>
-                <td>Sigma</td>
-                <td>Gramedia</td>
-                <td>2023</td>
-                <td>https://google.com/1.jpg</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal"
-                        data-bs-id="1"><i class="bi bi-pencil-square"></i> Edit</button>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal"
-                        data-bs-id="1"><i class="bi bi-trash"></i> Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Aku Dan Icikiwir</td>
-                <td>Asep</td>
-                <td>Gramedia</td>
-                <td>2020</td>
-                <td>https://google.com/2.jpg</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal"
-                        data-bs-id="2"><i class="bi bi-pencil-square"></i> Edit</button>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal"
-                        data-bs-id="2"><i class="bi bi-trash"></i> Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Cinta Itu Oraora</td>
-                <td>Eka Kurniawan</td>
-                <td>Gramedia</td>
-                <td>2018</td>
-                <td>https://google.com/3.jpg</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal"
-                        data-bs-id="2"><i class="bi bi-pencil-square"></i> Edit</button>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal"
-                        data-bs-id="2"><i class="bi bi-trash"></i> Hapus</button>
-                </td>
-            </tr>
+            <?php foreach ($books as $buku): ?>
+                <tr>
+                    <td><?= $buku['id']; ?></td>
+                    <td><?= $buku['judul']; ?></td>
+                    <td><?= $buku['pengarang']; ?></td>
+                    <td><?= $buku['penerbit']; ?></td>
+                    <td><?= $buku['tahun']; ?></td>
+                    <td>
+                        <img src="<?= base_url($buku['thumbnail_url']) ?>" alt="<?= $buku['judul'] ?>" class="img-thumbnail"
+                            style="width: 150px; height: auto">
+                    </td>
+                    <td>
+                        <a href="<?= base_url('admin/databuku/' . $buku['id'] . '/edit') ?>" class="btn btn-sm btn-info"><i
+                                class="bi bi-pencil-square"></i>Edit</a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal"
+                            data-bs-id="<?= $buku['id']; ?>"><i class="bi bi-trash"></i> Hapus</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+
         </tbody>
     </table>
 </div>
@@ -102,7 +89,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/databuku.php/simpan" method="POST" id="formTambah">
+                <form action="<?= base_url('admin/databuku') ?>" method="POST" enctype="multipart/form-data"
+                    id="formTambah">
                     <div class="mb-3">
                         <label for="judul">Judul</label>
                         <input type="text" name="judul" id="judul" class="form-control">
@@ -120,9 +108,9 @@
                         <input type="text" name="tahun" id="tahun" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="tahun">Thumbnail URL</label>
-                        <input type="url" name="thumbnail_url" id="thumbnail_url" class="form-control"
-                            placeholder="https:/example.com/image.jpg">
+                        <label for="tahun">Cover</label>
+                        <input type="file" accept="image/*" name="thumbnail_url" id="thumbnail_url"
+                            class="form-control">
                     </div>
                 </form>
             </div>
@@ -144,7 +132,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/index.php/hapus" method="POST" id="formHapus">
+                <form action="<?= base_url('admin/databuku/' . $buku['id'] . '/delete') ?>" method="GET" id="formHapus">
                     <input type="hidden" name="id" id="idHapus" value="">
                 </form>
                 <p class="">Apakah Anda yakin menghapus data dengan id <span id="textId"></span> ini?</p>

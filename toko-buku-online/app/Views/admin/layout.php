@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php">
+                <a class="nav-link" href="dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -58,20 +58,20 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="databuku">
                     <i class="fas fa-fw fa-book-open"></i>
                     <span>Data Buku</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="transaksi.php" data-target="#collapseTwo" aria-expanded="true"
+                <a class="nav-link" href="transaksi" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-credit-card"></i>
                     <span>Transaksi</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pelanggan.php" data-target="#collapseTwo" aria-expanded="true"
+                <a class="nav-link" href="pelanggan" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Pelanggan</span>
