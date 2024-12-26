@@ -1,0 +1,111 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    padding-top: 20px;
+    background-color: rgb(29, 29, 29);
+    transition: width 0.3s;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    color: white;
+}
+
+.sidebar .nav-link-admin {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.sidebar .description {
+    font-size: 14px;
+}
+
+.sidebar .description-admin {
+    font-size: 20px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgb(247, 160, 0);
+    color: black;
+    font-weight: bold;
+}
+
+.sidebar .sub-menu {
+    background-color: rgb(26, 26, 26);
+    padding-left: 3%;
+}
+
+.main-content {
+    height: 100%;
+    margin-left: 200px;
+    padding: 20px;
+}
+
+hr.custom-hr {
+    border: 1px solid white;
+}
+
+.sidebar-home {
+    background-color: #343a40;
+    padding: 20px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.sidebar-home h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.sidebar-menu {
+    padding-left: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-link {
+    font-size: 1rem;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+.sidebar-link:hover {
+    background-color: rgb(247, 160, 0);
+    font-weight: bold;
+    color: black;
+}
+
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar .description {
+        display: none;
+    }
+
+    .sidebar .nav-link {
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 60px;
+    }
+}
